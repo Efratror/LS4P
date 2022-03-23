@@ -38,7 +38,7 @@ export function constructClassParams(tokenArr: [ParseTree, ParseTree][]){
 			numberOfFields += 1
 		}
 	})
-	log.writeLog(`Local Class completion Invoked`)
+	log.writeLog(`[EVENT] Local Class completion Invoked`)
 }
 
 export function clearClassName(){

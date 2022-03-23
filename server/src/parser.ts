@@ -39,17 +39,17 @@ export function parseAST(processedText: string, textDocument: TextDocument) {
 	// This suites for raw java case - should handle for default and setupDraw case
 	try{
 		fs.writeFileSync(__dirname+"/compile/"+pStandards.defaultClassName+".java", processedText)
-		log.writeLog(`Java File creation successful`)
+		log.writeLog(`[SUCCES] Java File creation successful`)
 	} catch(e) {
-		log.writeLog(`[[ERR]] - Error in Java File Creation`)
+		log.writeLog(`[ERROR] - Error in Java File Creation`)
 	}
 
 	try{
 		childProcess.execSync(`javac -classpath ${__dirname.substring(0,__dirname.length-11)}/pcore/ ${__dirname}/compile/${pStandards.defaultClassName}.java -Xlint:none -Xstdout ${__dirname}/compile/error.txt`,
 			{ stdio:[ 'inherit', 'pipe', 'pipe' ] })
-		log.writeLog(`Java File compilation successful`)
+		log.writeLog(`[SUCCES] Java File compilation successful`)
 	} catch(e) {
-		log.writeLog(`[[ERR]] - Error in Java File Compilation`)
+		log.writeLog(`[ERROR] - Error in Java File Compilation`)
 	}
 
 	//Correct path for different OS's
@@ -61,7 +61,7 @@ export function parseAST(processedText: string, textDocument: TextDocument) {
 	}
 	diagnostics.cookCompilationDiagnostics(processedText, pwd)
 
-	log.writeLog("Parse Tree construction Successfully")
+	log.writeLog("[SUCCES] Parse Tree construction Successfully")
 }
 
 function extractTokens(gotOne: ParseTree){

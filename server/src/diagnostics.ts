@@ -81,11 +81,11 @@ export function cookCompilationDiagnostics(processedText: string, pwd: String){
 		if(data == ''){
 			// No Error on Compilation
 			setErrorNodeBackToDefault()
-			log.writeLog(`No error on Compilation`)
+			log.writeLog(`[SUCCES] No error on Compilation`)
 		} else if(data.split(`:`)[0] == `Note`){
 			// Compilation warning
 			setErrorNodeBackToDefault()
-			log.writeLog(`Compilation warning encountered`)
+			log.writeLog(`[ERROR] Compilation warning encountered`)
 		} else {
 			setErrorNodeBackToDefault()
 			let tempSplit = data.split('\n')
@@ -124,10 +124,10 @@ export function cookCompilationDiagnostics(processedText: string, pwd: String){
 				}
 			})
 			// Place a break point
-			log.writeLog(`[[ERR]] - Compiler throws errors check \`server\/out\/compile\/error\.txt\``)
+			log.writeLog(`[ERROR] - Compiler throws errors check \`server\/out\/compile\/error\.txt\``)
 		}
 	} catch(e) {
-		log.writeLog(`[[ERR]] - Problem with cooking diagnostics`)
+		log.writeLog(`[ERROR] - Problem with cooking diagnostics`)
 	}
 }
 

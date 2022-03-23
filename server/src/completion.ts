@@ -332,7 +332,7 @@ export function decideCompletionMethods(_textDocumentParams: CompletionParams, l
 	model.clearVaribaleDeclarationContext()
 	model.clearLocalClassDeclarators()
 
-	log.writeLog(`AutoCompletion invoked`)
+	log.writeLog(`[EVENT] AutoCompletion invoked`)
 
 	return resultantCompletionItem
 }

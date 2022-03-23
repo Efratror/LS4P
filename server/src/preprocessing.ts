@@ -74,11 +74,11 @@ export async function performPreProcessing(textDocument: lsp.TextDocument): Prom
 	if(higherOrderMethods.length > 0) {
 		processedText = pStandards.methodBehaviour(pStandards.settingsRenderPipeline(unProcessedText))
 		setBehaviours(false,true)
-		log.writeLog(`[[BEHAVIOUR]] - Method Behaviour`)
+		log.writeLog(`[BEHAVIOUR] - Method Behaviour`)
 	} else {
 		processedText = pStandards.setupBehaviour(pStandards.settingsRenderPipeline(unProcessedText))
 		setBehaviours(true,false)
-		log.writeLog(`[[BEHAVIOUR]] - SetupDraw Behaviour`)
+		log.writeLog(`[BEHAVIOUR] - SetupDraw Behaviour`)
 	}
 
 	parser.parseAST(processedText as string, textDocument)
