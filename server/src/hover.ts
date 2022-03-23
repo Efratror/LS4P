@@ -59,7 +59,7 @@ export async function checkforHoverContents(textDocument: lsp.TextDocument): Pro
 					hoverResult = scheduleHover(textDocument, params, errorLine)
 				})
 			}
-			log.writeLog(`Hover Invoked`)
+			log.writeLog(`[EVENT] Hover Invoked`)
 			return hoverResult
 		}
 	)

@@ -71,7 +71,7 @@ connection.onInitialize((params: InitializeParams) => {
 });
 
 connection.onInitialized(() => {
-	log.writeLog(`Server initialized`)
+	log.writeLog(`[INFO] Server initialized`)
 	if (hasConfigurationCapability) {
 		connection.client.register(DidChangeConfigurationNotification.type, undefined);
 	}
@@ -92,7 +92,7 @@ let globalSettings: ExampleSettings = defaultSettings;
 let documentSettings: Map<string, Thenable<ExampleSettings>> = new Map();
 
 connection.onDidChangeConfiguration(change => {
-	log.writeLog(`Config change event occured`)
+	log.writeLog(`[EVENT] Config change event occured`)
 	if (hasConfigurationCapability) {
 		documentSettings.clear();
 	} else {
@@ -122,21 +122,21 @@ export function getDocumentSettings(resource: string): Thenable<ExampleSettings>
 export let latestChangesInTextDoc: TextDocument
 
 documents.onDidOpen(event => {
-	log.writeLog(`File Open / Tab switching event occured`)
+	log.writeLog(`[EVENT] File Open / Tab switching event occured`)
 	latestChangesInTextDoc = event.document
 	preprocessing.performPreProcessing(event.document)
 	diagnostics.checkForRealtimeDiagnostics(event.document)
 });
 
 documents.onDidClose(e => {
-	log.writeLog(`File Close event occured`)
+	log.writeLog(`[EVENT] File Close event occured`)
 	documentSettings.delete(e.document.uri);
 });
 
 let bufferInProgress = false
 
 documents.onDidChangeContent(change => {
-	log.writeLog(`Outside -> Content change event occured`)
+	log.writeLog(`[EVENT] Outside -> Content change event occured`)
 	latestChangesInTextDoc = change.document
 	if(!bufferInProgress)
 		initPreProcessDiagnostics()
@@ -147,7 +147,7 @@ documents.onDidChangeContent(change => {
 async function initPreProcessDiagnostics() {
 	bufferInProgress = true
 	await sleep(300);
-	log.writeLog(`Inside -> Content change event occured`)
+	log.writeLog(`[EVENT] Inside -> Content change event occured`)
 	preprocessing.performPreProcessing(latestChangesInTextDoc)
 	diagnostics.checkForRealtimeDiagnostics(latestChangesInTextDoc)
 	bufferInProgress = false
