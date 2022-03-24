@@ -116,8 +116,6 @@ export function mapperPipeline(newUnProcessedText: String): string{
 		localUnProcessedText = localUnProcessedText.replace(tuple[0],tuple[1])
 	})
 	localUnProcessedText = localUnProcessedText.replace(preprocessing.singleLineComment,``)
-	// localUnProcessedText = localUnProcessedText.replace(/[\']{1}/g,"\\\'")
-	localUnProcessedText = localUnProcessedText.replace(/[\"]{1}/g,"\\\"")
 	return localUnProcessedText
 }
 
