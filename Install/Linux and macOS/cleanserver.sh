@@ -3,6 +3,7 @@ GREEN='\033[1;32m'
 NC='\033[0m'
 
 echo "${GREEN}Performing Server Cleanup...${NC}"
+cd ../../
 # Clean Server
 rm -R ./node_modules
 cd ./client

@@ -4,6 +4,7 @@ RED='\033[0;31m'
 YELLOW='\033[0;1;33m'
 NC='\033[0m'
 
+cd ../../
 echo "${RED}Installing required node modules...${NC}"
 # install required node_modules
 npm install
