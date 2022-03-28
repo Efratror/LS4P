@@ -5,6 +5,7 @@ import * as pstandard from './grammer/terms/preprocessingsnippets'
 import { parse } from 'java-ast'
 import { ParseTree } from 'antlr4ts/tree/ParseTree'
 import { tokenArray } from './parser';
+import * as sketch from './sketch'
 
 let currentTempAST: [ParseTree][] = new Array();
 let _currentTempCounter = -1
@@ -48,15 +49,23 @@ export function scheduleLookUpReference(_referenceParams: ReferenceParams): Loca
 		if((word[1] <= _referenceParams.position.character) && (_referenceParams.position.character <= word[2])){
 			tokenArray.forEach(function(token){
 				if(token[0].text == word[0]){
+					let lineNumberJavaFile = token[0].payload._line-adjustOffset
+					let difLine : number = 0;
+					let docUri : string = '';
+					if (sketch.transformDict.get(lineNumberJavaFile)) {
+						difLine = sketch.transformDict.get(lineNumberJavaFile)!.lineNumber
+						let docName =  sketch.transformDict.get(lineNumberJavaFile)!.fileName
+						docUri = sketch.uri+docName
+					}
 					multipleTokenOccurenceLocations[_multipleTokenCount] = {
-						uri: _referenceParams.textDocument.uri,
+						uri: docUri,
 						range: {
 							start: {
-								line: token[0].payload._line-(adjustOffset+1),
+								line: difLine-1,
 								character: token[0].payload._charPositionInLine
 							},
 							end: {
-								line: token[0].payload._line-(adjustOffset+1),
+								line: difLine-1,
 								character: token[0].payload._charPositionInLine + word[0].length
 							}
 						}
