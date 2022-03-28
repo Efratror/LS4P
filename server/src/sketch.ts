@@ -54,6 +54,25 @@ export function createSketch(textDocument: lsp.TextDocument) {
 	created = true
 }
 
+export function addTab(uri: string) {
+	if (created) {
+		let fileName = pathM.basename(uri)
+		if (fileName.endsWith('.pde')) {
+			let tabContents = fs.readdirSync(path+fileName, 'utf-8')
+			contents.set(fileName, tabContents)
+		}
+	}
+}
+
+export function removeTab(uri: string) {
+	if (created) {
+		let fileName = pathM.basename(uri)
+		if (fileName.endsWith('.pde') && contents.has(fileName)) {
+			contents.delete(fileName)
+		}
+	}
+}
+
 function getPathFromUri(uri : string) : string {
 	let path = uri.replace('file:///', '')
 	path =  path.replace('%3A', ':')
