@@ -100,7 +100,7 @@ function setErrorNodeBackToDefault(){
 	totalErrorCount = 0
 }
 
-export function cookCompilationDiagnostics(processedText: string, pwd: string){
+export function cookCompilationDiagnostics(pwd: string){
 	// If one error is fixed it's not popped from stack - check
 	try {  
 		let data = fs.readFileSync(`${__dirname}/compile/error.txt`, 'utf-8')
